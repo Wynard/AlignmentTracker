@@ -1,0 +1,8 @@
+{
+  "name": "Alignment Tracker",
+  "short_name": "AlignTrack",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a1929",
+  "theme_color": "#143E6F"
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Alignment Tracker</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#143E6F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/dark/main.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://js.arcgis.com/4.29/"></script>
+</head>
+<body>
+<div id="viewDiv"></div>
+<div class="top-bar">
+  <div class="top-left-actions">
+    <button class="top-action" id="btnBasemap" onclick="toggleBasemap()">Satellite</button>
+    <button class="top-action" id="btnRecenter" onclick="recenterMap()" style="display:none">⊕ Center</button>
+  </div>
+  <div class="alignment-name" id="alignmentName">No alignment selected</div>
+  <div class="gps-indicator inactive" id="gpsIndicator" onclick="toggleDebug()"></div>
+  <span class="gps-accuracy" id="gpsAccuracy"></span>
+</div>
+<div class="debug-log" id="debugLog"></div>
+<div class="hud">
+  <div class="hud-inner expanded" id="hudInner">
+    <button class="hud-toggle" onclick="toggleHud()"></button>
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btnTrackMode" onclick="setAppMode('track')">Track</button>
+      <button class="mode-btn" id="btnStakeoutMode" onclick="setAppMode('stakeout')">Stakeout</button>
+    </div>
+    <div class="station-display" id="stationDisplay" style="display:none;">
+      <div class="metric-card">
+        <div class="metric-label" id="primaryMetricLabel">Chainage</div>
+        <div class="metric-value" id="chainageValue">&mdash;</div>
+        <div class="metric-unit">km</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label" id="secondaryMetricLabel">Offset</div>
+        <div class="metric-value offset" id="offsetValue">&mdash;</div>
+        <div class="metric-unit" id="offsetDir">m</div>
+      </div>
+    </div>
+    <div class="selector-grid">
+      <div class="selector">
+        <label for="projectSelect">Project</label>
+        <select id="projectSelect">
+          <option value="">Loading projects...</option>
+        </select>
+      </div>
+      <div class="selector">
+        <label for="alignmentSelect">Alignment</label>
+        <select id="alignmentSelect" disabled>
+          <option value="">Select a project first</option>
+        </select>
+      </div>
+    </div>
+    <div class="stakeout-row hidden" id="stakeoutRow">
+      <input class="stakeout-input" type="text" id="stakeoutInput" placeholder="1+250" inputmode="text" autocomplete="off">
+      <button class="btn btn-secondary" onclick="applyStakeoutTarget()">Set Target</button>
+    </div>
+    <div class="status-msg" id="statusMsg">Loading alignments...</div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
